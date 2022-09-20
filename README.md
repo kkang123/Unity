@@ -119,8 +119,8 @@ print(a==b, a != b, a>b, a<b, a>=b, a<=b)
 ### 조건문
 - 기본 if문
 ```python
-a = 99<br>
-if a< 100:<br>
+a = 99
+if a< 100:
     print("100보다 작군요.")
 ```
 <br>
