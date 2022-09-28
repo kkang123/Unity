@@ -323,3 +323,61 @@ aa[:2] #10, 20
     - len() : 리스트에 포함된 전체 항목의 개수를 센다 # len(리스트이름)
     - copy() : 리스트 내용을 새로운 리스트에 복사한다 # 새리스트 = 리스트이름.copy()
     - sorted() : 리스트의 항목을 정렬해서 새로운 리스트에 대입 # 새리스트 = sorted(리스트)
+<br>
+
+- 2차원 리스트
+2차원 리스트는 1차원 리스트를 여러 개 연결한 것으로 첨자를 2개 사용한다.
+
+- 1차원 리스트 개념 aa = [10, 20, 30]
+- 2차원 리스트 개념 aa = [[1, 2, 3, 4],
+                         [5, 6, 7, 8],
+                         [9, 10, 11, 12]]
+                         3행 4열
+                    
+- 컴프리헨션
+`컨프리헨션(함축)`은 값이 순차적인 리스트를 한 줄로 만드는 간단한 방법이다.
+
+<br>
+
+```python
+numList = []
+for num in range(1, 6):
+    numList.append(num) #1, 2, 3, 4, 5
+numList #print(numList)
+#출력 [1, 2, 3, 4, 5]
+```
+<br>
+
+이 코드를 컨프리헨션으로 바꾸면
+<br>
+
+```python
+numList = [num for num in range(1, 6)]
+numList
+```
+<br>
+
+```리스트 = [수식 for 항목 in range() if 조건식]```
+
+<br>
+
+제곱 구성 리스트
+```python
+numList = [num * num for num in range(1, 6)]
+print(numList)
+```
+
+<br>
+
+if문 추가 3의 배수로만 리스트 구성
+```python
+numList = [num for num in range(1, 21) if num % 3 == 0]
+print(numList)
+```
+
+- 2차원 컴프리헨션
+형식 ```리스트 = [[수식 for 항목 in range()] for 항목 in range()]```
+```python
+list2 = [[0 for _ in range(4)] for _ in range(3)]
+print(list2)
+```
