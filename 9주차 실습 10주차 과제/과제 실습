@@ -1,17 +1,94 @@
-player.cs
-```c#
-
-```
-
-wall.cs
-```c#
-
-```
-
-spawn.cs
+# player.cs
 ```c#
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+
+using UnityEngine.SceneManagement;
+
+public class player : MonoBehaviour
+{
+    //public float jupmp_power = 5;
+    public float jump_power; //점프파워
+
+    float time; //시간 저장
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        jump_power = Random.Range(4.0f, 9.0f); //2. 무작위 난이도(랜덤 점프 값 주기)
+
+        time = 0.0f; //시간초기화
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //if (Input.GetButtonDown("Jump"))
+            //GetComponent<Rigidbody>().velocity = new Vector3(0, jump_power, 0);
+
+        //1.누르고 있는 동안에도 큐브가 상승하도록 변경
+        if (Input.GetButton("Jump"))
+            GetComponent<Rigidbody>().velocity = new Vector3(0, jump_power, 0);
+
+
+        //시간 측정
+        time += Time.deltaTime; //시간 측정
+
+    }
+
+
+    void OnCollisionEnter(Collision other)
+    {
+        SceneManager.LoadScene("main_scene"); //충돌 시 씬 변경
+    }
+
+    //5. GUI이벤트
+    void OnGUI()
+    {
+        int second = (int)time; //초 변수
+        string Time = string.Format("{0}", second); //시간초 카운팅
+
+        GUI.Label(new Rect(30, Screen.height - 100, 256, 32), "버틴 시간 : " + Time); //시간 표시
+        GUI.Label(new Rect(30, Screen.height - 40, 128, 32), "점프 파워 : " + jump_power.ToString()); //점프 값 표시
+    }
+
+}
+
+```
+
+# wall.cs
+```c#
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class wall : MonoBehaviour
+{
+    //public float speed = -5; //이동속도
+    public float speed;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        speed = Random.Range(-6.0f, -4.0f);//2.무작위 난이도 중 랜덤 벽 이동 속도
+
+        Destroy(gameObject, 5.0f); //일정 시간(5초)이 지나면 지나간 벽 오브젝트 삭제
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        transform.Translate(speed * Time.deltaTime, 0, 0);
+    }
+}
+
+```
+
+# spawn.cs
+```c#
 using UnityEngine;
 
 public class spawn : MonoBehaviour
@@ -19,19 +96,24 @@ public class spawn : MonoBehaviour
     public GameObject pf_wall;
     //public float interval = 1.5f; //벽 생성 시간
     //public float interval = 5.0f;
-    //public float interval;
     
 
     // Start is called before the first frame update
     IEnumerator Start() //쓰레드를 생성하여 별도로 동작시킴
     {
-        //interval = Random.Range(1.0f, 2.0f)
         while (true)
         {
             Instantiate(pf_wall, transform.position, transform.rotation);
             //yield return new WaitForSeconds(interval);
             yield return new WaitForSeconds(Random.Range(1.0f, 2.0f)); //벽 생성 시간랜덤 설정, pf_wall 적용
         }
+    }
+
+    void Strat()
+    {
+
+        transform.position = new Vector3(13.0f, Random.Range(-3.0f, 4.0f), 0.0f);
+        // 2. 무작위 난이도 벽 y값 랜덤 지정
     }
 
     // Update is called once per frame
