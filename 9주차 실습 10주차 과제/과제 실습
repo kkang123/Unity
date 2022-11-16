@@ -72,6 +72,9 @@ public class wall : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        transform.position = new Vector3(13.0f, Random.Range(-3.0f, 4.0f), 0.0f);
+        // 2. 무작위 난이도 벽 y값 랜덤 지정
+
         speed = Random.Range(-6.0f, -4.0f);//2.무작위 난이도 중 랜덤 벽 이동 속도
 
         Destroy(gameObject, 5.0f); //일정 시간(5초)이 지나면 지나간 벽 오브젝트 삭제
@@ -107,13 +110,6 @@ public class spawn : MonoBehaviour
             //yield return new WaitForSeconds(interval);
             yield return new WaitForSeconds(Random.Range(1.0f, 2.0f)); //벽 생성 시간랜덤 설정, pf_wall 적용
         }
-    }
-
-    void Strat()
-    {
-
-        transform.position = new Vector3(13.0f, Random.Range(-3.0f, 4.0f), 0.0f);
-        // 2. 무작위 난이도 벽 y값 랜덤 지정
     }
 
     // Update is called once per frame
