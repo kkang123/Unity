@@ -10,5 +10,34 @@ wall.cs
 
 spawn.cs
 ```c#
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
+public class spawn : MonoBehaviour
+{
+    public GameObject pf_wall;
+    //public float interval = 1.5f; //벽 생성 시간
+    //public float interval = 5.0f;
+    //public float interval;
+    
+
+    // Start is called before the first frame update
+    IEnumerator Start() //쓰레드를 생성하여 별도로 동작시킴
+    {
+        //interval = Random.Range(1.0f, 2.0f)
+        while (true)
+        {
+            Instantiate(pf_wall, transform.position, transform.rotation);
+            //yield return new WaitForSeconds(interval);
+            yield return new WaitForSeconds(Random.Range(1.0f, 2.0f)); //벽 생성 시간랜덤 설정, pf_wall 적용
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
 ```
